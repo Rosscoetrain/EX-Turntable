@@ -17,6 +17,16 @@
  *  along with EX-Turntable.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+
+/*
+ *
+ * Additional changes to use pins defined in defines.h by
+ * Ross Scanlon (RosscoeTrain) 2026
+ * to use the RT_EX_TURNTABLE board
+ * 
+ */
+
+
 /*=============================================================
  * This file contains all functions pertinent to turntable
  * operation including stepper movements, relay phase switching,
@@ -27,12 +37,24 @@
 #include "IOFunctions.h"
 
 const long sanitySteps = SANITY_STEPS;              // Define an arbitrary number of steps to prevent indefinite spinning if homing/calibrations fails.
-const uint8_t limitSensorPin = 2;                   // Define pin 2 for the traverser mode limit sensor.
-const uint8_t homeSensorPin = 5;                    // Define pin 5 for the home sensor.
-const uint8_t relay1Pin = 3;                        // Control pin for relay 1.
-const uint8_t relay2Pin = 4;                        // Control pin for relay 2.
-const uint8_t ledPin = 6;                           // Pin for LED output.
-const uint8_t accPin = 7;                           // Pin for accessory output.
+
+#ifndef USE_RT_EX_TURNTABLE
+const uint8_t limitSensorPin = LIMIT_SENSOR_PIN;                   // Define pin 2 for the traverser mode limit sensor.
+const uint8_t homeSensorPin = HOME_SENSOR_PIN;                    // Define pin 5 for the home sensor.
+const uint8_t relay1Pin = RELAY_1_PIN;                        // Control pin for relay 1.
+const uint8_t relay2Pin = RELAY_2_PIN;                        // Control pin for relay 2.
+const uint8_t ledPin = LED_PIN;                           // Pin for LED output.
+const uint8_t accPin = ACC_PIN;                           // Pin for accessory output.
+#else
+const uint8_t limitSensorPin = LIMIT_SENSOR_PIN;    // Define pin for the traverser mode limit sensor.
+const uint8_t homeSensorPin = HOME_SENSOR_PIN;      // Define pin for the home sensor.
+//const uint8_t relay1Pin = 3;                        // Control pin for relay 1.
+const uint8_t relay2Pin = RELAY_PIN;                // Control pin for DPDT relay
+const uint8_t ledPin = LED_PIN;                     // Pin for LED output.
+const uint8_t accPin = ACC_PIN;                     // Pin for accessory output.
+#endif
+
+
 const long homeSensitivity = HOME_SENSITIVITY;      // Define the minimum number of steps required before homing sensor deactivates.
 const int16_t totalMinutes = 21600;                 // Total minutes in one rotation (360 * 60)
 
@@ -84,7 +106,7 @@ void startupConfiguration() {
     Serial.print(F("|"));
     Serial.println(invertEnable);
   }
-  stepper.setEnablePin(A2);
+  stepper.setEnablePin(STEPPER_ENABLE_PIN);                               // RKS add define instead of A2
   stepper.setPinsInverted(invertDirection, invertStep, invertEnable);
 #endif
 #if HOME_SENSOR_ACTIVE_STATE == LOW
@@ -109,9 +131,12 @@ void startupConfiguration() {
 #endif
 
 // Configure relay output pins
+#ifndef USE_RT_EX_TURNTABLE
   pinMode(relay1Pin, OUTPUT);
   pinMode(relay2Pin, OUTPUT);
-
+#else
+  pinMode(relay2Pin, OUTPUT);
+#endif
 // Ensure relays are inactive on startup
   setPhase(0);
 
@@ -253,11 +278,19 @@ void moveToPosition(long steps, uint8_t phaseSwitch) {
 // Function to set phase.
 void setPhase(uint8_t phase) {
 #if RELAY_ACTIVE_STATE == HIGH
+#ifndef USE_RT_EX_TURNTABLE
   digitalWrite(relay1Pin, phase);
   digitalWrite(relay2Pin, phase);
+#else
+  digitalWrite(relay2Pin, phase);
+#endif
 #elif RELAY_ACTIVE_STATE == LOW
+#ifndef USE_RT_EX_TURNTABLE
   digitalWrite(relay1Pin, !phase);
   digitalWrite(relay2Pin, !phase);
+#else
+  digitalWrite(relay2Pin, !phase);
+#endif
 #endif
 }
 

@@ -4,6 +4,7 @@
  *  This is the configuration file for Turntable-EX.
  */
 
+
 /////////////////////////////////////////////////////////////////////////////////////
 //  Define a valid (and free) I2C address, 0x60 is the default.
 // 
@@ -173,3 +174,24 @@
 //  In TRAVERSER mode, default is 10ms as these would typically use mechanical switches.
 //  In TURNTABLE mode, default is 0ms as these would typically use hall effect sensors.
 // #define DEBOUNCE_DELAY 10
+
+
+/*
+ *  Defines added for RT_EX_Turntable all in one board.
+ */
+
+
+#define USE_RT_EX_TURNTABLE
+
+
+/* Set the stepper driver to two wire driver on RT_EX_TURNTABLE board*/
+#ifdef USE_RT_EX_TURNTABLE
+
+#ifdef STEPPER_DRIVER
+#undef STEPPER_DRIVER
+#endif
+
+#define STEPPER_DRIVER A4988
+
+#endif
+

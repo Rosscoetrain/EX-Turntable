@@ -19,7 +19,10 @@
 
 #include "IOFunctions.h"
 #include "EEPROMFunctions.h"
+
+#ifndef ESP32
 #include <avr/wdt.h>
+#endif
 
 unsigned long gearingFactor = STEPPER_GEARING_FACTOR;
 const byte numChars = 20;
@@ -43,6 +46,11 @@ bool sensorTesting = false;
 // Function to setup Wire library and functions
 void setupWire() {
   Wire.begin(I2C_ADDRESS);
+#ifdef USE_RT_EX_TURNTABLE
+  // Disable internal pull-ups
+  digitalWrite(SDA, LOW);
+  digitalWrite(SCL, LOW);
+#endif
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
 }
@@ -194,8 +202,12 @@ void serialCommandM(long steps) {
 }
 
 void serialCommandR() {
+#ifndef ESP32
   wdt_enable(WDTO_15MS);
   delay(50);
+#else
+  ESP.restart();
+#endif
 }
 
 // T command to perform sensor testing
