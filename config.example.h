@@ -92,7 +92,7 @@
 //  in those instances, no custom configuration would be required.
 // 
 
-#define STEPPER_DRIVER ULN2003_HALF_CW
+//#define STEPPER_DRIVER ULN2003_HALF_CW
 // #define STEPPER_DRIVER ULN2003_HALF_CCW
 // #define STEPPER_DRIVER ULN2003_FULL_CW
 // #define STEPPER_DRIVER ULN2003_FULL_CCW
@@ -101,16 +101,16 @@
 // When using a two wire driver (eg. A4988, DRV8825, TMC2208), it may be necessary to invert
 // the direction pin. This is likely required when using a TMC2208. This has no effect on
 // ULN2003.
-// #define INVERT_DIRECTION
+//#define INVERT_DIRECTION
 // 
 // When using a two wire driver (eg. A4988, DRV8825, TMC2208), it may be necessary to invert
 // the step pin. If so, uncomment this line. This has no effect on ULN2003.
-// #define INVERT_STEP
+//#define INVERT_STEP
 // 
 // When using a two wire driver (eg. A4988, DRV8825, TMC2208), it may be necessary to invert
 // the enable pin behaviour if you wish to have the stepper driver disabled when not moving.
 // This has no effect on ULN2003.
-// #define INVERT_ENABLE
+//#define INVERT_ENABLE
 
 /////////////////////////////////////////////////////////////////////////////////////
 //  Define the various stepper configuration items below if the defaults don't suit
@@ -192,6 +192,8 @@
 #endif
 
 #define STEPPER_DRIVER A4988
+
+#define INVERT_ENABLE
 
 #endif
 

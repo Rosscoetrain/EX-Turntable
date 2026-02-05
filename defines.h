@@ -121,8 +121,8 @@
 #define LED_PIN 32
 #define ACC_PIN 33
 
-#define STEPPER_STEP_PIN 16
-#define STEPPER_DIR_PIN 17
+#define STEPPER_STEP_PIN 17
+#define STEPPER_DIR_PIN 16
 #define STEPPER_ENABLE_PIN 18 
 #endif
 
