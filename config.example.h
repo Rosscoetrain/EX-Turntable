@@ -33,6 +33,7 @@
 //  HIGH = When activated, the input is pulled up (typically 5V).
 // 
 #define HOME_SENSOR_ACTIVE_STATE LOW
+//#define HOME_SENSOR_ACTIVE_STATE HIGH
 
 /////////////////////////////////////////////////////////////////////////////////////
 //  REQUIRED FOR TRAVERSER MODE ONLY
@@ -181,11 +182,13 @@
  */
 
 
-#define USE_RT_EX_TURNTABLE
+// uncomment this to use default settings for RT_EX-Turntable all in on board
+//#define USE_RT_EX_TURNTABLE
 
 
-/* Set the stepper driver to two wire driver on RT_EX_TURNTABLE board*/
 #ifdef USE_RT_EX_TURNTABLE
+
+// Set the stepper driver to two wire driver on RT_EX-TURNTABLE board
 
 #ifdef STEPPER_DRIVER
 #undef STEPPER_DRIVER
@@ -193,7 +196,11 @@
 
 #define STEPPER_DRIVER A4988
 
+// TMC2209 needs the enable pin inverted.
 #define INVERT_ENABLE
+
+// This allows use of 1/64 and 1/128 microsteps
+#define SANITY_STEPS 30000
 
 #endif
 
