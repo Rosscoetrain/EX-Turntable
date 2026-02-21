@@ -202,5 +202,8 @@
 // This allows use of 1/64 and 1/128 microsteps
 #define SANITY_STEPS 30000
 
+// This allows moving far enough during calibration from home when using 1/64 and 1/128 microsteps
+#define HOME_SENSITIVITY 600
+
 #endif
 
