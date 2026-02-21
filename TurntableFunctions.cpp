@@ -144,6 +144,14 @@ void startupConfiguration() {
   pinMode(ledPin, OUTPUT);
   pinMode(accPin, OUTPUT);
 
+// If using RT_EX-Turntable board configure extra output pins
+#ifdef USE_RT_EX_TURNTABLE
+  pinMode(EXTRA_OUTPUT_PIN_1, OUTPUT);
+  pinMode(EXTRA_OUTPUT_PIN_2, OUTPUT);
+  pinMode(EXTRA_OUTPUT_PIN_3, OUTPUT);
+  pinMode(EXTRA_OUTPUT_PIN_4, OUTPUT);
+#endif
+
 // If step count explicitly defined, use that
 #ifdef FULL_STEP_COUNT
   fullTurnSteps = FULL_STEP_COUNT;
@@ -462,3 +470,47 @@ void setLEDActivity(uint8_t activity) {
 void setAccessory(bool state) {
   digitalWrite(accPin, state);
 }
+
+
+#ifdef USE_RT_EX_TURNTABLE
+
+void setExtra(uint8_t activity) {
+  switch (activity)
+  {
+  case 10:
+    digitalWrite(EXTRA_OUTPUT_PIN_1, HIGH);
+    break;
+  
+  case 11:
+    digitalWrite(EXTRA_OUTPUT_PIN_1, LOW);
+    break;
+  
+  case 12:
+    digitalWrite(EXTRA_OUTPUT_PIN_2, HIGH);
+    break;
+  
+  case 13:
+    digitalWrite(EXTRA_OUTPUT_PIN_2, LOW);
+    break;
+
+  case 14:
+    digitalWrite(EXTRA_OUTPUT_PIN_3, HIGH);
+    break;
+  
+  case 15:
+    digitalWrite(EXTRA_OUTPUT_PIN_3, LOW);
+    break;
+  
+  case 16:
+    digitalWrite(EXTRA_OUTPUT_PIN_4, HIGH);
+    break;
+  
+  case 17:
+    digitalWrite(EXTRA_OUTPUT_PIN_4, LOW);
+    break;
+    default:
+    break;
+  }  
+}
+
+#endif

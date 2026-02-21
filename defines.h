@@ -112,6 +112,11 @@
 #define STEPPER_DIR_PIN A1
 #define STEPPER_ENABLE_PIN A2
 
+#define EXTRA_OUTPUT_PIN_1 9
+#define EXTRA_OUTPUT_PIN_2 10
+#define EXTRA_OUTPUT_PIN_3 11
+#define EXTRA_OUTPUT_PIN_4 12
+
 #else
                                  // this is for ESP32
 
@@ -124,6 +129,12 @@
 #define STEPPER_STEP_PIN 17
 #define STEPPER_DIR_PIN 16
 #define STEPPER_ENABLE_PIN 18 
+
+#define EXTRA_OUTPUT_PIN_1 14
+#define EXTRA_OUTPUT_PIN_2 13
+#define EXTRA_OUTPUT_PIN_3 15
+#define EXTRA_OUTPUT_PIN_4 19
+
 #endif
 
 

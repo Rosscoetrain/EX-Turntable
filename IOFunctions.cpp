@@ -398,7 +398,13 @@ void receiveEvent(int received) {
         Serial.println(F("DEBUG: Turn accessory pin off"));
       }
       setAccessory(LOW);
-    } else {
+
+#ifdef USE_RT_EX_TURNTABLE
+    } else if ((activity >= 10) && (activity <= 17)) {
+      setExtra(activity);
+#endif
+
+   } else {
       if (debug) {
         Serial.print(F("DEBUG: Invalid step count or activity provided, or turntable still moving: "));
         Serial.print(steps);
