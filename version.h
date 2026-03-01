@@ -1,7 +1,10 @@
 #ifndef version_h
 #define version_h
 
-#define VERSION "0.8.0"
+#define VERSION "0.8.1"
+
+// 0.8.1
+//  - add functions to control External 1-4 on RT_EX_Turntable single board
 
 // 0.8.0:
 //  - add defines for RT_EX_Turntable single board
