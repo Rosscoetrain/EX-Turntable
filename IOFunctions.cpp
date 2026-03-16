@@ -45,11 +45,18 @@ bool sensorTesting = false;
 
 // Function to setup Wire library and functions
 void setupWire() {
+//#ifndef ESP32
   Wire.begin(I2C_ADDRESS);
+//#else
+//  Wire.begin(I2C_ADDRESS, ESP32_I2C_SDA, ESP32_I2C_SCL);
+//#endif
+
 #ifdef USE_RT_EX_TURNTABLE
   // Disable internal pull-ups
+#ifndef ESP32
   digitalWrite(SDA, LOW);
   digitalWrite(SCL, LOW);
+#endif
 #endif
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
