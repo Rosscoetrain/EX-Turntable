@@ -80,6 +80,9 @@ void writeEEPROM(long steps) {
   EEPROM.write(6, (steps >> 16) & 0xFF);
   EEPROM.write(7, (steps >> 8) & 0xFF);
   EEPROM.write(8, steps & 0xFF);
+#ifdef ESP32
+  EEPROM.commit();
+#endif
 }
 
 // Function to clear step count and identifier from EEPROM.
@@ -87,4 +90,7 @@ void clearEEPROM() {
   for (uint8_t i = 0; i < 9; i++) {
     EEPROM.write(i, 0);
   }
+#ifdef ESP32
+  EEPROM.commit();
+#endif
 }

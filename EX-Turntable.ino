@@ -20,6 +20,10 @@
 
 // Include required libraries.
 #include <Arduino.h>
+#ifdef ESP32
+#include <EEPROM.h>
+#endif
+
 #include "defines.h"
 
 // Include local files
@@ -29,6 +33,9 @@
 bool lastRunningState;   // Stores last running state to allow turning the stepper off after moves.
 
 void setup() {
+#ifdef ESP32
+  EEPROM.begin(EEPROM_SIZE);
+#endif
   // Run startup configuration
   startupConfiguration();
 

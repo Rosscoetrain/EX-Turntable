@@ -118,24 +118,24 @@
 #define EXTRA_OUTPUT_PIN_4 12
 
 #else
-                                 // this is for ESP32 38 dev board
-                                 // pin number after // is for module on RT_EX-Turntable
+// this is for ESP32
 
+#define EEPROM_SIZE 9
 
-#define LIMIT_SENSOR_PIN 33 // 25
-#define HOME_SENSOR_PIN 5 // 26
-#define RELAY_PIN 4 // 27
-#define LED_PIN 35 // 32
-#define ACC_PIN 32 // 33
+#define LIMIT_SENSOR_PIN 34
+#define HOME_SENSOR_PIN 35
+#define RELAY_PIN 27
+#define LED_PIN 32
+#define ACC_PIN 33
 
-#define STEPPER_STEP_PIN 14 // 17
-#define STEPPER_DIR_PIN 15 // 16
-#define STEPPER_ENABLE_PIN 16 // 18 
+#define STEPPER_STEP_PIN 17
+#define STEPPER_DIR_PIN 16
+#define STEPPER_ENABLE_PIN 18 
 
-#define EXTRA_OUTPUT_PIN_1 25 // 14
-#define EXTRA_OUTPUT_PIN_2 26 // 13
-#define EXTRA_OUTPUT_PIN_3 27 // 15
-#define EXTRA_OUTPUT_PIN_4 12 // 19
+#define EXTRA_OUTPUT_PIN_1 14
+#define EXTRA_OUTPUT_PIN_2 13
+#define EXTRA_OUTPUT_PIN_3 15
+#define EXTRA_OUTPUT_PIN_4 19
 
 #endif
 
