@@ -5,6 +5,8 @@
 
 // 0.8.1
 //  - add functions to control External 1-4 on RT_EX_Turntable single board
+//  - add script to make it easy to upload without EX-Installer
+
 
 // 0.8.0:
 //  - add defines for RT_EX_Turntable single board
